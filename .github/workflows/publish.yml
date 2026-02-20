@@ -1,0 +1,32 @@
+name: Publish Package
+
+on:
+  push:
+    brances:
+      - "main"
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.JS
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install deps
+        run: yarn install --frozen-lockfile
+
+      - name: Generate TS Protobuf
+        run: yarn run generate
+
+      - name: Publish package
+        run: npm publish
