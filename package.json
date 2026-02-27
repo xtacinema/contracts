@@ -5,20 +5,25 @@
   "scripts": {
     "generate": "protoc -I ./proto ./proto/*.proto --ts_proto_out=./gen --ts_proto_opt=nestJs=true,package=omit"
   },
-  "files": [
-    "proto",
-    "gen"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xtacinema/contracts.git"
-  },
   "publishConfig": {
     "access": "public"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "xtaide",
+    "email": "admin@xtacinema.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xtacinema/contracts"
   },
   "dependencies": {
     "@nestjs/microservices": "^11.1.14",
     "rxjs": "^7.8.2",
     "ts-proto": "^2.11.4"
-  }
+  },
+  "files": [
+    "proto",
+    "gen"
+  ]
 }
