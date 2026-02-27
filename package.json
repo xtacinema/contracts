@@ -9,8 +9,13 @@
     "proto",
     "gen"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xtacinema/contracts.git"
+  },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "dependencies": {
     "@nestjs/microservices": "^11.1.14",

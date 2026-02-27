@@ -4,9 +4,10 @@ on:
   push:
     branches:
       - "main"
+  # Лучше добавить: workflow_dispatch:  # для ручного запуска теста
 
 permissions:
-  id-token: write # Required for OIDC
+  id-token: write # обязательно для OIDC
   contents: read
 
 jobs:
@@ -22,6 +23,9 @@ jobs:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
 
+      - name: Upgrade npm to latest
+        run: npm install -g npm@latest
+
       - name: Install Protoc
         run: sudo apt-get update && sudo apt-get install -y protobuf-compiler
 
@@ -32,4 +36,6 @@ jobs:
         run: yarn run generate
 
       - name: Publish package
-        run: npm publish
+        run: npm publish --provenance --access public
+        # --provenance — для OIDC provenance
+        # --access public — обязательно для scoped пакетов, если не указано в package.json
