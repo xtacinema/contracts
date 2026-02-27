@@ -13,7 +13,6 @@ jobs:
   publish:
     name: Publish Job
     runs-on: ubuntu-latest
-    environment: npm
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
