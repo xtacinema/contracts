@@ -5,10 +5,15 @@ on:
     branches:
       - "main"
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   publish:
     name: Publish Job
     runs-on: ubuntu-latest
+    environment: npm
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,6 +34,4 @@ jobs:
         run: yarn run generate
 
       - name: Publish package
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance
