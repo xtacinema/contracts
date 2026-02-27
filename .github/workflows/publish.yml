@@ -33,4 +33,4 @@ jobs:
         run: yarn run generate
 
       - name: Publish package
-        run: npm publish --provenance
+        run: npm publish
