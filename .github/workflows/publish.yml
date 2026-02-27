@@ -4,26 +4,24 @@ on:
   push:
     branches:
       - "main"
-  # Лучше добавить: workflow_dispatch:  # для ручного запуска теста
+  workflow_dispatch: # добавь для ручного теста
 
 permissions:
-  id-token: write # обязательно для OIDC
+  id-token: write
   contents: read
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.JS
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
 
-      - name: Upgrade npm to latest
+      - name: Upgrade npm to latest (для OIDC + provenance 2026)
         run: npm install -g npm@latest
 
       - name: Install Protoc
@@ -35,7 +33,8 @@ jobs:
       - name: Generate TS Protobuf
         run: yarn run generate
 
+      - name: Clear any old auth (важно!)
+        run: npm config delete always-auth || true
+
       - name: Publish package
         run: npm publish --provenance --access public
-        # --provenance — для OIDC provenance
-        # --access public — обязательно для scoped пакетов, если не указано в package.json

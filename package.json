@@ -11,11 +11,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/xtacinema/contracts.git"
+    "url": "git+https://github.com/xtacinema/contracts.git"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "dependencies": {
     "@nestjs/microservices": "^11.1.14",
