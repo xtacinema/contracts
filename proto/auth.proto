@@ -13,5 +13,5 @@ message SendOtpRequest {
 }
 
 message SendOtpResponse {
-  string ok = 1;
+  bool ok = 1;
 }
